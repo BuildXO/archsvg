@@ -1,0 +1,110 @@
+{
+  "name": "archsvg",
+  "displayName": "ArchSVG",
+  "description": "Generate SVG assets inside VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "archsvg.generateIcon",
+        "title": "ArchSVG: Generate SVG Icon"
+      },
+      {
+        "command": "archsvg.generateFlowchart",
+        "title": "ArchSVG: Generate Flowchart from JSON"
+      },
+      {
+        "command": "archsvg.generateFlowchartFromComment",
+        "title": "ArchSVG: Generate Flowchart from Selected Comment"
+      },
+      {
+        "command": "archsvg.insertSvg",
+        "title": "ArchSVG: Insert SVG into Active File"
+      },
+      {
+        "command": "archsvg.saveSvg",
+        "title": "ArchSVG: Save SVG to /assets Folder"
+      },
+      {
+        "command": "archsvg.previewSvg",
+        "title": "ArchSVG: Preview SVG"
+      }
+    ],
+    "configuration": {
+      "title": "ArchSVG",
+      "properties": {
+        "ArchSVG.primaryColor": {
+          "type": "string",
+          "default": "#3498db",
+          "description": "Primary color for generated SVG assets"
+        },
+        "ArchSVG.secondaryColor": {
+          "type": "string",
+          "default": "#2ecc71",
+          "description": "Secondary color for generated SVG assets"
+        },
+        "ArchSVG.layoutMode": {
+          "type": "string",
+          "enum": ["vertical", "horizontal", "compact-vertical", "symmetric"],
+          "default": "vertical",
+          "description": "Default layout mode for flowcharts"
+        },
+        "ArchSVG.theme": {
+          "type": "string",
+          "enum": ["github-light", "github-dark", "minimal-mono", "blueprint"],
+          "default": "github-light",
+          "description": "Theme preset for flowchart diagrams"
+        },
+        "ArchSVG.typography": {
+          "type": "string",
+          "enum": ["default", "compact", "bold", "monospace", "large"],
+          "default": "default",
+          "description": "Typography preset for diagram text"
+        },
+        "ArchSVG.exportWidth": {
+          "type": "string",
+          "enum": ["auto", "600", "800", "1200", "1600"],
+          "default": "auto",
+          "description": "Export width preset for generated SVGs"
+        },
+        "ArchSVG.includeBackground": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include background color and grid pattern in exported SVGs"
+        },
+        "ArchSVG.minifyOutput": {
+          "type": "boolean",
+          "default": false,
+          "description": "Minify SVG output (removes whitespace)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "test:phase2": "npm run compile && node ./out/tests/phase2.test.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.109.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.54.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
