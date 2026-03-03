@@ -22,12 +22,12 @@ Generate → Preview → Export → Insert.
 
 <p align="center">
   <b>GitHub Light</b><br/>
-  <img src="https://github.com/BuildXO/archsvg/blob/9835a6420c576f5a400c1945c9e07cc25ed19539/images/demo-flowchart-light.png" width="800"/>
+  <img src="./images/demo-flowchart-light.png" width="800"/>
 </p>
 
 <p align="center">
   <b>GitHub Dark</b><br/>
-  <img src="https://github.com/BuildXO/archsvg/blob/9835a6420c576f5a400c1945c9e07cc25ed19539/images/demo-flowchart-dark.png" width="800"/>
+  <img src="./images/demo-flowchart-dark.png" width="800"/>
 </p>
 
 ## ✨ Features

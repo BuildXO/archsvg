@@ -4,7 +4,7 @@
   "publisher": "LunaCode",
   "icon": "images/archsvg.png",
   "description": "Generate SVG assets inside VS Code",
-  "version": "0.0.2",
+  "version": "0.0.3",
    "license": "MIT",
   "repository": {
     "type": "git",
