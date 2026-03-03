@@ -25,7 +25,7 @@ export async function generateIcon(context: vscode.ExtensionContext) {
     }
 
     try {
-        const config = vscode.workspace.getConfiguration('svgGen');
+        const config = vscode.workspace.getConfiguration('archsvg');
         const primaryColor = config.get<string>('primaryColor', '#3498db');
         const secondaryColor = config.get<string>('secondaryColor', '#2ecc71');
 
@@ -56,7 +56,7 @@ export async function generateFlowchart(context: vscode.ExtensionContext) {
     }
 
     try {
-        const config = vscode.workspace.getConfiguration('svgGen');
+        const config = vscode.workspace.getConfiguration('archsvg');
         const primaryColor = config.get<string>('primaryColor', '#3498db');
         const secondaryColor = config.get<string>('secondaryColor', '#2ecc71');
 
@@ -100,7 +100,7 @@ export async function generateFlowchartFromComment(context: vscode.ExtensionCont
         const jsonInput = JSON.stringify(flowchartData, null, 2);
 
         // Use existing flowchart generator
-        const config = vscode.workspace.getConfiguration('svgGen');
+        const config = vscode.workspace.getConfiguration('archsvg');
         const primaryColor = config.get<string>('primaryColor', '#3498db');
         const secondaryColor = config.get<string>('secondaryColor', '#2ecc71');
 

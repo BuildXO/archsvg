@@ -1,8 +1,51 @@
 {
   "name": "archsvg",
   "displayName": "ArchSVG",
+  "publisher": "LunaCode",
+  "icon": "images/archsvg.png",
   "description": "Generate SVG assets inside VS Code",
-  "version": "0.0.1",
+  "version": "0.0.2",
+   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BuildXO/archsvg"
+  },
+  "bugs": {
+    "url": "https://github.com/BuildXO/archsvg/issues"
+  },
+  "homepage": "https://github.com/BuildXO/archsvg#readme",
+  "keywords": [
+  "svg",
+  "flowchart",
+  "diagram",
+  "architecture",
+  "architecture-diagram",
+  "documentation",
+  "readme",
+  "markdown",
+  "developer-tools",
+  "vscode",
+  "visualization",
+  "graph",
+  "uml",
+  "system-design",
+  "devtool",
+  "productivity",
+  "design",
+  "engineering",
+  "vector",
+  "export",
+  "svg-generator",
+  "flow",
+  "node",
+  "routing",
+  "layout",
+  "technical-writing",
+  "backend",
+  "frontend",
+  "devops",
+  "clean-code"
+  ],
   "engines": {
     "vscode": "^1.109.0"
   },

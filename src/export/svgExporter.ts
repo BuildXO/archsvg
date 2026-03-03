@@ -49,13 +49,13 @@ export class SvgExporter {
             return svg;
         }
 
-        const [, , , vbWidth, vbHeight] = viewBoxMatch[1].split(' ').map(Number);
+        const [, , vbWidth, vbHeight] = viewBoxMatch[1].split(' ').map(Number);
         const aspectRatio = vbHeight / vbWidth;
         const newHeight = Math.round(targetWidth * aspectRatio);
 
-        // Replace width and height attributes
-        let result = svg.replace(/width="[^"]+"/g, `width="${targetWidth}"`);
-        result = result.replace(/height="[^"]+"/g, `height="${newHeight}"`);
+        // Replace width and height attributes on the root SVG element only
+        let result = svg.replace(/(<svg[^>]*\s)width="[^"]+"/, `$1width="${targetWidth}"`);
+        result = result.replace(/(<svg[^>]*\s)height="[^"]+"/, `$1height="${newHeight}"`);
 
         return result;
     }

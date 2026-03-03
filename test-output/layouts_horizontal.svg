@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 280" width="1140" height="280">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#57606a" />
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#eaeef2" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1140" height="280" fill="#ffffff"/>
+  <rect width="1140" height="280" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Edges -->
+  <path d="M 180 120 L 252 120" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 400 105 L 420 105 L 420 65 L 472 65" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 620 50 L 640 50 L 640 120 L 692 120" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 840 120 L 912 120" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 620 80 L 640 80 L 640 160 L 472 160" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 400 135 L 420 135 L 420 190 L 472 190" stroke="#57606a" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- Nodes -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="95" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="110" y="121" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Start</text>
+  <g filter="url(#shadow)">
+    <rect x="260" y="95" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="330" y="121" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Authenticate</text>
+  <g filter="url(#shadow)">
+    <rect x="480" y="40" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="550" y="66" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Validate Input</text>
+  <g filter="url(#shadow)">
+    <rect x="480" y="150" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="550" y="176" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Error</text>
+  <g filter="url(#shadow)">
+    <rect x="700" y="95" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="770" y="121" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Process Data</text>
+  <g filter="url(#shadow)">
+    <rect x="920" y="95" width="140" height="50" rx="6" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5" />
+  </g>
+  <text x="990" y="121" text-anchor="middle" dominant-baseline="middle" fill="#24292f" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Success</text>
+</svg>

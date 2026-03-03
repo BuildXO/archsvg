@@ -24,18 +24,75 @@ export class EdgeRouter {
     ): EdgePath[] {
         const paths: EdgePath[] = [];
 
+        // Group edges by source node to detect divergence
+        const edgesBySource = new Map<string, Array<{ edge: any; fromNode: PositionedNode; toNode: PositionedNode }>>();
+        
+        // Group edges by target node to detect convergence
+        const edgesByTarget = new Map<string, Array<{ edge: any; fromNode: PositionedNode; toNode: PositionedNode }>>();
+        
         for (const edge of data.edges) {
             const fromNode = positions.find(p => p.node.id === edge.from);
             const toNode = positions.find(p => p.node.id === edge.to);
 
             if (fromNode && toNode) {
+                const edgeInfo = { edge, fromNode, toNode };
+                
+                if (!edgesBySource.has(edge.from)) {
+                    edgesBySource.set(edge.from, []);
+                }
+                edgesBySource.get(edge.from)!.push(edgeInfo);
+                
+                if (!edgesByTarget.has(edge.to)) {
+                    edgesByTarget.set(edge.to, []);
+                }
+                edgesByTarget.get(edge.to)!.push(edgeInfo);
+            }
+        }
+
+        // Create index maps for divergence and convergence
+        const divergenceIndex = new Map<string, number>();
+        const convergenceIndex = new Map<string, number>();
+        
+        // Calculate indices for each edge
+        for (const [sourceId, edges] of edgesBySource) {
+            edges.forEach((edgeInfo, idx) => {
+                const key = `${edgeInfo.edge.from}-${edgeInfo.edge.to}`;
+                divergenceIndex.set(key, idx);
+            });
+        }
+        
+        for (const [targetId, edges] of edgesByTarget) {
+            edges.forEach((edgeInfo, idx) => {
+                const key = `${edgeInfo.edge.from}-${edgeInfo.edge.to}`;
+                convergenceIndex.set(key, idx);
+            });
+        }
+
+        // Route all edges
+        for (const edge of data.edges) {
+            const fromNode = positions.find(p => p.node.id === edge.from);
+            const toNode = positions.find(p => p.node.id === edge.to);
+
+            if (fromNode && toNode) {
+                const key = `${edge.from}-${edge.to}`;
+                const sourceEdges = edgesBySource.get(edge.from)!;
+                const targetEdges = edgesByTarget.get(edge.to)!;
+                
+                const divergenceInfo = sourceEdges.length > 1 
+                    ? { total: sourceEdges.length, index: divergenceIndex.get(key)! }
+                    : undefined;
+                    
+                const convergenceInfo = targetEdges.length > 1
+                    ? { total: targetEdges.length, index: convergenceIndex.get(key)! }
+                    : undefined;
+                
                 let path: string;
 
                 // Route based on layout mode
                 if (layoutMode === 'horizontal') {
-                    path = this.createHorizontalPath(fromNode, toNode, nodeWidth, nodeHeight);
+                    path = this.createHorizontalPath(fromNode, toNode, nodeWidth, nodeHeight, divergenceInfo, convergenceInfo);
                 } else {
-                    path = this.createVerticalPath(fromNode, toNode, nodeWidth, nodeHeight);
+                    path = this.createVerticalPath(fromNode, toNode, nodeWidth, nodeHeight, divergenceInfo, convergenceInfo);
                 }
 
                 paths.push({ edge, path, fromNode, toNode });
@@ -53,7 +110,9 @@ export class EdgeRouter {
         fromNode: PositionedNode,
         toNode: PositionedNode,
         nodeWidth: number,
-        nodeHeight: number
+        nodeHeight: number,
+        divergenceInfo?: { total: number; index: number },
+        convergenceInfo?: { total: number; index: number }
     ): string {
         const { verticalGap, balancedMerges } = this.config;
 
@@ -68,9 +127,24 @@ export class EdgeRouter {
             if (fromRight) {
                 // From left node to right node
                 const startX = fromNode.x + nodeWidth; // Right side of source
-                const startY = fromNode.y + nodeHeight / 2; // Middle of source
+                let startY = fromNode.y + nodeHeight / 2; // Middle of source
                 const endX = toNode.x; // Left side of target
-                const endY = toNode.y + nodeHeight / 2; // Middle of target
+                let endY = toNode.y + nodeHeight / 2; // Middle of target
+                
+                // Apply vertical distribution for same-level edges
+                if (divergenceInfo && divergenceInfo.total > 1) {
+                    const spreadRange = nodeHeight * 0.6;
+                    const step = spreadRange / (divergenceInfo.total - 1);
+                    const offset = (divergenceInfo.index * step) - (spreadRange / 2);
+                    startY += offset;
+                }
+                
+                if (convergenceInfo && convergenceInfo.total > 1) {
+                    const spreadRange = nodeHeight * 0.6;
+                    const step = spreadRange / (convergenceInfo.total - 1);
+                    const offset = (convergenceInfo.index * step) - (spreadRange / 2);
+                    endY += offset;
+                }
                 
                 // Simple horizontal routing with optional vertical adjustment
                 if (Math.abs(startY - endY) < 5) {
@@ -84,9 +158,24 @@ export class EdgeRouter {
             } else {
                 // From right node to left node (backward connection)
                 const startX = fromNode.x; // Left side of source
-                const startY = fromNode.y + nodeHeight / 2;
+                let startY = fromNode.y + nodeHeight / 2;
                 const endX = toNode.x + nodeWidth; // Right side of target
-                const endY = toNode.y + nodeHeight / 2;
+                let endY = toNode.y + nodeHeight / 2;
+                
+                // Apply vertical distribution for backward edges
+                if (divergenceInfo && divergenceInfo.total > 1) {
+                    const spreadRange = nodeHeight * 0.6;
+                    const step = spreadRange / (divergenceInfo.total - 1);
+                    const offset = (divergenceInfo.index * step) - (spreadRange / 2);
+                    startY += offset;
+                }
+                
+                if (convergenceInfo && convergenceInfo.total > 1) {
+                    const spreadRange = nodeHeight * 0.6;
+                    const step = spreadRange / (convergenceInfo.total - 1);
+                    const offset = (convergenceInfo.index * step) - (spreadRange / 2);
+                    endY += offset;
+                }
                 
                 // Route around: go left, then up/down, then right
                 const clearance = 30;
@@ -97,10 +186,26 @@ export class EdgeRouter {
         }
 
         // Connection points for standard vertical routing
-        const startX = fromNode.x + nodeWidth / 2;
+        let startX = fromNode.x + nodeWidth / 2;
         const startY = fromNode.y + nodeHeight; // Bottom of source
-        const endX = toNode.x + nodeWidth / 2;
+        let endX = toNode.x + nodeWidth / 2;
         const endY = toNode.y; // Top of target
+
+        // Distribute departure points for diverging edges (horizontally)
+        if (divergenceInfo && divergenceInfo.total > 1) {
+            const spreadRange = nodeWidth * 0.6; // Use 60% of node width
+            const step = spreadRange / (divergenceInfo.total - 1);
+            const offset = (divergenceInfo.index * step) - (spreadRange / 2);
+            startX += offset;
+        }
+
+        // Distribute arrival points for converging edges (horizontally)
+        if (convergenceInfo && convergenceInfo.total > 1) {
+            const spreadRange = nodeWidth * 0.6; // Use 60% of node width
+            const step = spreadRange / (convergenceInfo.total - 1);
+            const offset = (convergenceInfo.index * step) - (spreadRange / 2);
+            endX += offset;
+        }
 
         // Check if nodes are vertically aligned
         const isAligned = Math.abs(startX - endX) < 5;
@@ -131,15 +236,33 @@ export class EdgeRouter {
         fromNode: PositionedNode,
         toNode: PositionedNode,
         nodeWidth: number,
-        nodeHeight: number
+        nodeHeight: number,
+        divergenceInfo?: { total: number; index: number },
+        convergenceInfo?: { total: number; index: number }
     ): string {
         const { verticalGap } = this.config;
 
         // Connection points
         const startX = fromNode.x + nodeWidth; // Right of source
-        const startY = fromNode.y + nodeHeight / 2;
+        let startY = fromNode.y + nodeHeight / 2;
         const endX = toNode.x; // Left of target
-        const endY = toNode.y + nodeHeight / 2;
+        let endY = toNode.y + nodeHeight / 2;
+
+        // Distribute departure points for diverging edges
+        if (divergenceInfo && divergenceInfo.total > 1) {
+            const spreadRange = nodeHeight * 0.6; // Use 60% of node height
+            const step = spreadRange / (divergenceInfo.total - 1);
+            const offset = (divergenceInfo.index * step) - (spreadRange / 2);
+            startY += offset;
+        }
+
+        // Distribute arrival points for converging edges
+        if (convergenceInfo && convergenceInfo.total > 1) {
+            const spreadRange = nodeHeight * 0.6; // Use 60% of node height
+            const step = spreadRange / (convergenceInfo.total - 1);
+            const offset = (convergenceInfo.index * step) - (spreadRange / 2);
+            endY += offset;
+        }
 
         // Check if nodes are horizontally aligned
         const isAligned = Math.abs(startY - endY) < 5;

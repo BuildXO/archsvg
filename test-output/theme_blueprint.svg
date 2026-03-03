@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 690" width="460" height="690">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#7dd3fc" />
+    </marker>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0e7490" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="460" height="690" fill="#0c4a6e"/>
+  <rect width="460" height="690" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Edges -->
+  <path d="M 210 90 L 210 162" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 168 220 L 168 240 L 110 240 L 110 292" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 68 350 L 68 370 L 210 370 L 210 422" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 210 480 L 210 552" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 180 340 L 210 340 L 210 310 L 232 310" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 252 220 L 252 240 L 352 240 L 352 292" stroke="#7dd3fc" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- Nodes -->
+  <rect x="140" y="40" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="210" y="66" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Start</text>
+  <rect x="140" y="170" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="210" y="196" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Authenticate</text>
+  <rect x="40" y="300" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="110" y="326" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Validate Input</text>
+  <rect x="240" y="300" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="310" y="326" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Error</text>
+  <rect x="140" y="430" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="210" y="456" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Process Data</text>
+  <rect x="140" y="560" width="140" height="50" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="210" y="586" text-anchor="middle" dominant-baseline="middle" fill="#e0f2fe" font-size="13" font-weight="500" font-family="-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif" letter-spacing="0">Success</text>
+</svg>

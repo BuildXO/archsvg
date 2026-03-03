@@ -232,12 +232,12 @@ export function example7_CompleteCustomSetup() {
 
 export function example8_VSCodeConfigIntegration(vscodeConfig: any) {
     // Read configuration from VS Code settings
-    const layoutMode = vscodeConfig.get('svgGen.layoutMode', 'vertical');
-    const themeName = vscodeConfig.get('svgGen.theme', 'github-light');
-    const typographyName = vscodeConfig.get('svgGen.typography', 'default');
-    const widthPreset = vscodeConfig.get('svgGen.exportWidth', 'auto');
-    const includeBackground = vscodeConfig.get('svgGen.includeBackground', true);
-    const minifyOutput = vscodeConfig.get('svgGen.minifyOutput', false);
+    const layoutMode = vscodeConfig.get('archsvg.layoutMode', 'vertical');
+    const themeName = vscodeConfig.get('archsvg.theme', 'github-light');
+    const typographyName = vscodeConfig.get('archsvg.typography', 'default');
+    const widthPreset = vscodeConfig.get('archsvg.exportWidth', 'auto');
+    const includeBackground = vscodeConfig.get('archsvg.includeBackground', true);
+    const minifyOutput = vscodeConfig.get('archsvg.minifyOutput', false);
     
     const config: Partial<DiagramConfig> = {
         layoutMode,

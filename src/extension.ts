@@ -6,19 +6,19 @@ import * as commands from './commands';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	console.log('SVG & AI Asset Generator is now active!');
+	console.log('ArchSVG is now active!');
 
 	// Register all commands
 	context.subscriptions.push(
-		vscode.commands.registerCommand('svg-asset-generator.generateIcon', () => commands.generateIcon(context)),
-		vscode.commands.registerCommand('svg-asset-generator.generateFlowchart', () => commands.generateFlowchart(context)),
-		vscode.commands.registerCommand('svg-asset-generator.generateFlowchartFromComment', () => commands.generateFlowchartFromComment(context)),
-		vscode.commands.registerCommand('svg-asset-generator.insertSvg', commands.insertSvg),
-		vscode.commands.registerCommand('svg-asset-generator.saveSvg', commands.saveSvg),
-		vscode.commands.registerCommand('svg-asset-generator.previewSvg', () => commands.previewSvg(context))
+		vscode.commands.registerCommand('archsvg.generateIcon', () => commands.generateIcon(context)),
+		vscode.commands.registerCommand('archsvg.generateFlowchart', () => commands.generateFlowchart(context)),
+		vscode.commands.registerCommand('archsvg.generateFlowchartFromComment', () => commands.generateFlowchartFromComment(context)),
+		vscode.commands.registerCommand('archsvg.insertSvg', commands.insertSvg),
+		vscode.commands.registerCommand('archsvg.saveSvg', commands.saveSvg),
+		vscode.commands.registerCommand('archsvg.previewSvg', () => commands.previewSvg(context))
 	);
 
-	vscode.window.showInformationMessage('SVG & AI Asset Generator ready!');
+	vscode.window.showInformationMessage('ArchSVG ready!');
 }
 
 // This method is called when your extension is deactivated

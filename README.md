@@ -6,8 +6,6 @@ No bloated UI. No cloud services. No complex syntax.
 
 Just structured diagrams rendered as beautiful standalone SVG.
 
----
-
 ## Why ArchSVG?
 
 Most diagram tools are either:
@@ -20,9 +18,17 @@ ArchSVG is built specifically for developers who write documentation.
 
 Generate → Preview → Export → Insert.
 
-That’s it.
+## 🎨 Theme Presets
 
----
+<p align="center">
+  <b>GitHub Light</b><br/>
+  <img src="https://raw.githubusercontent.com/BuildXO/archsvg/main/images/demo-flowchart-light.png" width="800"/>
+</p>
+
+<p align="center">
+  <b>GitHub Dark</b><br/>
+  <img src="https://raw.githubusercontent.com/BuildXO/archsvg/main/images/demo-flowchart-dark.png" width="800"/>
+</p>
 
 ## ✨ Features
 
@@ -64,12 +70,7 @@ Generate diagrams directly from comment arrow notation:
 
 Select → Run command → Done.
 
-Supports:
-
-- // line comments
-- # hash comments
-- /* block comments */
-- Chained arrows (A -> B -> C)
+Supports: line, hash, and block comments.
 
 ### 🎨 SVG Icon Generator
 
@@ -97,96 +98,21 @@ Access via Command Palette (Ctrl+Shift+P / Cmd+Shift+P):
 - ArchSVG: Insert SVG into Active File
 - ArchSVG: Save SVG to /assets Folder
 
-### 📊 Flowchart from JSON Example
-
-```json
-{
-  "nodes": [
-    {"id": "start", "label": "Start"},
-    {"id": "process", "label": "Process Data"},
-    {"id": "decision", "label": "Valid?"},
-    {"id": "end", "label": "End"}
-  ],
-  "edges": [
-    {"from": "start", "to": "process"},
-    {"from": "process", "to": "decision"},
-    {"from": "decision", "to": "end"}
-  ]
-}
-```
-
-Generate → Preview → Save or Insert.
-
 ### ⚙ Extension Settings
 
 Configure in settings.json:
-
-```json
-{
-  "svgGen.primaryColor": "#3498db",
-  "svgGen.secondaryColor": "#2ecc71",
-  "svgGen.layoutMode": "vertical",
-  "svgGen.theme": "github-light",
-  "svgGen.typography": "default",
-  "svgGen.exportWidth": "800",
-  "svgGen.includeBackground": true,
-  "svgGen.minifyOutput": false
-}
-```
+- Customize colors, layout mode, theme, export width, background, and minification via settings.json.
 
 #### Available Settings
 
-- svgGen.primaryColor
-- svgGen.secondaryColor
-- svgGen.layoutMode
-- svgGen.theme
-- svgGen.typography
-- svgGen.exportWidth
-- svgGen.includeBackground
-- svgGen.minifyOutput
-
-### 🏗 Architecture
-
-Clean modular structure:
-
-```
-src/
-├── layout/
-├── routing/
-├── themes/
-├── renderer/
-├── export/
-├── parsers/
-├── utils/
-├── webview/
-└── extension.ts
-```
-
-Design principles:
-
-- Zero external dependencies
-- Deterministic layout engine
-- Single responsibility modules
-- Clean TypeScript implementation
-- Production-ready SVG output
-
-### 🛠 Development
-
-- npm install
-- npm run compile
-- npm run watch
-- npm test
-
-Press F5 to launch Extension Development Host.
-
-### 🔐 Security
-
-ArchSVG sanitizes all generated SVG content:
-
-- Removes <script> tags
-- Strips event handlers (onclick, onload, etc.)
-- Blocks foreignObject
-- Prevents unsafe protocols
+- archsvg.primaryColor
+- archsvg.secondaryColor
+- archsvg.layoutMode
+- archsvg.theme
+- archsvg.typography
+- archsvg.exportWidth
+- archsvg.includeBackground
+- archsvg.minifyOutput
 
 ### 🎯 Built For
 
@@ -197,14 +123,3 @@ ArchSVG sanitizes all generated SVG content:
 - Engineering teams
 
 If you need clean architecture diagrams inside your workflow, ArchSVG is built for you.
-
-### Roadmap
-
-Future enhancements may include:
-
-- Additional diagram types
-- Template library
-- Advanced layout improvements
-- Premium features
-
-ArchSVG — Clean diagrams. Built for developers.
