@@ -1,5 +1,7 @@
 # ArchSVG — Developer-First SVG Architecture Diagrams
 
+[![Sponsor BuildXO](https://img.shields.io/badge/Sponsor-BuildXO-ea4aaa?logo=github-sponsors)](https://github.com/sponsors/BuildXO)
+
 Create clean, production-ready SVG flowcharts and architecture diagrams directly inside VS Code.
 
 No bloated UI. No cloud services. No complex syntax.
