@@ -6,6 +6,9 @@
   "description": "Generate SVG assets inside VS Code",
   "version": "0.0.3",
    "license": "MIT",
+  "sponsor": {
+    "url": "https://github.com/sponsors/BuildXO"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/BuildXO/archsvg"
